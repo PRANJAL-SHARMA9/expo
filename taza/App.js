@@ -1,39 +1,30 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './Screen/HomeScreen';
+import ProfileScreen from './Screen/ProfileScreen';
+import NotificationScreen from './Screen/NotificationScreen';
+import SearchScreen from './Screen/SearchScreen'; 
 
-function HomeScreen() {
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name='Notification' component={NotificationScreen}/>
+      <Tab.Screen name='Prfile' component={ProfileScreen}/>
+    </Tab.Navigator>
   );
 }
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={require('./assets/adaptive-icon.png')}
-    />
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-function App() {
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-         
-        />
-      </Stack.Navigator>
+      <MyTabs />
     </NavigationContainer>
   );
 }
-
-export default App;
