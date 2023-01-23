@@ -6,6 +6,10 @@ import HomeScreen from './Screen/HomeScreen';
 import ProfileScreen from './Screen/ProfileScreen';
 import NotificationScreen from './Screen/NotificationScreen';
 import SearchScreen from './Screen/SearchScreen'; 
+import Onboarding from './Screen/Onboarding';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 
 const Tab = createBottomTabNavigator();
@@ -21,10 +25,24 @@ function MyTabs() {
   );
 }
 
+function MyStack(){
+  return(
+  <Stack.Navigator screenOptions={{headerShown:true}} >
+    <Stack.Screen options={{headerTitle:"Welcome",headerShown:false}} name='Onboarding' component={Onboarding}/>
+    <Stack.Screen options={{headerShown:false}} name="Home" component={MyTabs} />
+      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name='Notification' component={NotificationScreen}/>
+      <Stack.Screen name='Profile' component={ProfileScreen}/>
+      
+  </Stack.Navigator>
+  );
+}
+
+
 export default function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <MyStack />
     </NavigationContainer>
   );
 }
